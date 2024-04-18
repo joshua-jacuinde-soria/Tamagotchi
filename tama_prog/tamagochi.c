@@ -106,7 +106,7 @@ int main() {
                 lcd_set_cursor(1, (MAX_CHARS) - strlen(message[arreglo]));
                 lcd_string(message[arreglo]);
               }
-            sleep_ms(150);
+            sleep_ms(120);
         }
         static char *opcion;
         lcd_send_byte(LCD_DISPLAYCONTROL | LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF, LCD_COMMAND);
@@ -115,24 +115,23 @@ int main() {
         {
         case 0:
             zumbador(0);
+            opcion = message[0];
+            actividades(opcion);
+            static char *text = "Enter to feed";
+            lcd_set_cursor(1, (MAX_CHARS - strlen(text)));
+            lcd_string(text);
             while (gpio_get(BUTTON_4))
             {
-                opcion = message[0];
-                actividades(opcion);
-                static char *text = "Enter to feed";
-                lcd_set_cursor(1, (MAX_CHARS - strlen(text)));
-                lcd_string(text);
                 if (!gpio_get(BUTTON_3))
                 {
                     zumbador(1);
                     create_custom_chars(ajolote_C);
                     mostrar_ajolote();
-                    sleep_ms(700);
+                    sleep_ms(500);
 
                 }
                 create_custom_chars(ajolote_N);
                 mostrar_ajolote();
-                sleep_ms(50);
                 
             }
             zumbador(0);
