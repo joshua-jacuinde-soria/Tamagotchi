@@ -145,23 +145,22 @@ int main() {
             text = "Enter to wake";
             lcd_set_cursor(1, (MAX_CHARS - strlen(text)));
             lcd_string(text);
+            int cont = 0;
             while (gpio_get(BUTTON_4))
             {
-                int cont = 0;
-                while (cont < 3)
+                while (cont < 5)
                 {
                     if (!gpio_get(BUTTON_3))
                     {
                         zumbador(1);
                         cont ++;
-                    }
+                    }                    
                 }
                 create_custom_chars(ajolote_N);
                 mostrar_ajolote();
-                text = "Is awake";
+                text = "     Is awake";
                 lcd_set_cursor(1, (MAX_CHARS - strlen(text)));
                 lcd_string(text);
-                sleep_ms(500);
             }
             zumbador(0);
             break; 
