@@ -137,7 +137,33 @@ int main() {
             zumbador(0);
             break;            
         case 1:
+            zumbador(0);
             opcion = message[1];
+            actividades(opcion);
+            create_custom_chars(ajolote_D);
+            mostrar_ajolote();
+            text = "Enter to wake";
+            lcd_set_cursor(1, (MAX_CHARS - strlen(text)));
+            lcd_string(text);
+            while (gpio_get(BUTTON_4))
+            {
+                int cont = 0;
+                while (cont < 3)
+                {
+                    if (!gpio_get(BUTTON_3))
+                    {
+                        zumbador(1);
+                        cont ++;
+                    }
+                }
+                create_custom_chars(ajolote_N);
+                mostrar_ajolote();
+                text = "Is awake";
+                lcd_set_cursor(1, (MAX_CHARS - strlen(text)));
+                lcd_string(text);
+                sleep_ms(500);
+            }
+            zumbador(0);
             break; 
         case 2:
             opcion = message[2];
@@ -150,12 +176,12 @@ int main() {
             break;
         case 5:
             opcion = message[5];
+
             break;         
         default:
             break;
-        }
-                
-        }
+        }  
+    }
 #endif
 }
 
